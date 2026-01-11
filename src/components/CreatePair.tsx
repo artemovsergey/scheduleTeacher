@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 export const CreatePair = () => {
 
     const navigate = useNavigate()
-    const [pair, setPair] = useState<any>({})
+    const [pair] = useState<any>({})
 
     const formHandler = (e: any) => {
         e.preventDefault();
