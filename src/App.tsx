@@ -10,7 +10,7 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen" >
 
-      <BrowserRouter basename="/scheduleTeacher">
+      <BrowserRouter>
         <Header />
 
         <Routes>
