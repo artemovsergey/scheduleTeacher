@@ -1,6 +1,6 @@
 {
-  "homepage": "https://github.com/artemovsergey/scheduleTeacher.git",
   "name": "react-app",
+  "homepage": "https://github.com/artemovsergey/scheduleTeacher",
   "private": true,
   "version": "0.0.0",
   "type": "module",
