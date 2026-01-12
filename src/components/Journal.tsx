@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { getDateDay } from "./ScheduleByDay"
 import type ScheduleTeacher from "../models/schedule"
 

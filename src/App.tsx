@@ -1,7 +1,7 @@
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Home from "./components/Home"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom"
 import { CreatePair } from "./components/CreatePair"
 import { Journal } from "./components/Journal"
 import { useEffect, useState } from "react"
@@ -77,7 +77,8 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen" >
 
-      <BrowserRouter basename="/scheduleTeacher" >
+      {/* <BrowserRouter basename="/scheduleTeacher" > */}
+      <HashRouter>
         <Header teacher={teacher} onChangeTeacher={handleTeacherChange} />
 
         <Routes >
@@ -88,7 +89,8 @@ export default function App() {
         </Routes>
 
         <Footer />
-      </BrowserRouter>
-    </div>
+      </HashRouter>
+      {/* </BrowserRouter> */}
+    </div >
   )
 }

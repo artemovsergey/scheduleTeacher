@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "../data/scheduleData"
 import { ScheduleByDay } from "./ScheduleByDay"
 import type ScheduleTeacher from "../models/schedule"
@@ -37,8 +37,8 @@ export default function Home(props: { schedules: ScheduleTeacher[], onRemovePair
 
             <div className="flex flex-row m-2 items-center ">
                 <button className="p-2 m-2 text-1xl rounded-full hover:bg-amber-500 disabled:bg-gray-200  border border-amber-300 w-10"
-                        disabled={currentWeek == 1}
-                        onClick={() => setcurrentWeek(w => w - 1)}>
+                    disabled={currentWeek == 1}
+                    onClick={() => setcurrentWeek(w => w - 1)}>
                     &larr;
                 </button>
 
@@ -53,11 +53,11 @@ export default function Home(props: { schedules: ScheduleTeacher[], onRemovePair
                 </button>
             </div>
 
-            <ScheduleByDay key={1} removeSchedule={props.onRemovePair} schedule={props.schedules } weekDay={1} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={2} removeSchedule={props.onRemovePair} schedule={props.schedules } weekDay={2} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={3} removeSchedule={props.onRemovePair} schedule={props.schedules } weekDay={3} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={4} removeSchedule={props.onRemovePair} schedule={props.schedules } weekDay={4} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={5} removeSchedule={props.onRemovePair} schedule={props.schedules } weekDay={5} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={1} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={1} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={2} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={2} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={3} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={3} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={4} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={4} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={5} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={5} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
         </main>
     )
 }
