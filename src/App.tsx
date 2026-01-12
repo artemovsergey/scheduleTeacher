@@ -1,7 +1,7 @@
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Home from "./components/Home"
-import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom"
+import { HashRouter, Route, Routes } from "react-router-dom"
 import { CreatePair } from "./components/CreatePair"
 import { Journal } from "./components/Journal"
 import { useEffect, useState } from "react"
