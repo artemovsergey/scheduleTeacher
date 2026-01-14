@@ -1,3 +1,6 @@
+#
+- https://registry.npmjs.org/
+
 # Создание проекта
 
 - `npm create vite@latest appname`
