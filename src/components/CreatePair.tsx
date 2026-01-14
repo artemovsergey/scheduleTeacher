@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import type ScheduleTeacher from "../models/schedule"
 
-export const CreatePair = () => {
+export const CreatePair = (props: { teacher: string, schedule: any[], update: (s: ScheduleTeacher[]) => void }) => {
 
     const navigate = useNavigate()
     const [pair] = useState<any>({})
@@ -9,12 +10,20 @@ export const CreatePair = () => {
     const formHandler = (e: any) => {
         e.preventDefault();
         pair.weeks = pair.weeks.split(',').map((w: string) => parseInt(w.trim()))
-        const loadedSchedules = localStorage.getItem("scheduleSave")
-        if (loadedSchedules != null) {
-            let loaded: any[] = JSON.parse(loadedSchedules)
-            loaded.push(pair)
-            localStorage.setItem("scheduleSave", JSON.stringify(loaded))
+
+        switch (props.teacher) {
+            case 'asv':
+                localStorage.setItem("scheduleASV", JSON.stringify([...props.schedule, pair]))
+                break;
+            case 'lsp':
+                localStorage.setItem("scheduleLSP", JSON.stringify([...props.schedule, pair]))
+                break;
+            case 'eiv':
+                localStorage.setItem("scheduleEIV", JSON.stringify([...props.schedule, pair]))
+                break;
         }
+
+        props.update([...props.schedule, pair])
         navigate('/')
         console.log(pair)
     }

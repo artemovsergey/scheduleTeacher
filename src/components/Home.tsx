@@ -1,43 +1,28 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "../data/scheduleData"
 import { ScheduleByDay } from "./ScheduleByDay"
-import { schedules } from "../data/scheduleData"
 import type ScheduleTeacher from "../models/schedule"
 
-export default function Home() {
+export default function Home(props: { schedules: ScheduleTeacher[], onRemovePair: (pair: ScheduleTeacher) => void }) {
 
     const [currentWeek, setcurrentWeek] = useState(1)
     const [isAllWeeks, setIsAllWeeks] = useState(false)
-    const [currentSchedule, setCurrentSchedule] = useState<ScheduleTeacher[]>([])
 
-    const loadToLocalStorage = () => {
+    // const loadToLocalStorage = () => {
 
-        let currentSchedule = localStorage.getItem("scheduleSave")
-        if (currentSchedule == null) {
-            localStorage.setItem("scheduleSave", JSON.stringify(schedules))
-            console.log("Загрузка расписания в localStorage")
-        } else {
-            let loadedSchedule: ScheduleTeacher[] = JSON.parse(currentSchedule)
-            console.log("Загрузка расписания из localStorage")
-            console.log(loadedSchedule)
-            setCurrentSchedule(loadedSchedule)
-        }
-    }
+    //     let currentSchedule = localStorage.getItem("scheduleSave")
+    //     if (currentSchedule == null) {
+    //         localStorage.setItem("scheduleSave", JSON.stringify(props.schedules))
+    //         console.log("Загрузка расписания в localStorage")
+    //     } else {
+    //         let loadedSchedule: ScheduleTeacher[] = JSON.parse(currentSchedule)
+    //         console.log("Загрузка расписания из localStorage")
+    //         console.log(loadedSchedule)
+    //         // setCurrentSchedule(loadedSchedule)
+    //     }
+    // }
 
-    useEffect(() => loadToLocalStorage(), [])
-
-    const removeScheduleHandler = (pair: ScheduleTeacher) => {
-
-        const result: boolean = confirm("Вы согласны?");
-        if (result) {
-            let schedule = currentSchedule.filter(p => p.id != pair.id)
-            localStorage.setItem("scheduleSave", JSON.stringify(schedule))
-            setCurrentSchedule(schedule)
-        } else {
-            console.log("Пользователь выбрал Нет/Отмена");
-        }
-
-    }
+    // useEffect(() => loadToLocalStorage(), [])
 
     return (
         <main className="flex flex-1 flex-col ml-5 gap-5 mt-10 items-center">
@@ -52,15 +37,14 @@ export default function Home() {
 
             <div className="flex flex-row m-2 items-center ">
                 <button className="p-2 m-2 text-1xl rounded-full hover:bg-amber-500 disabled:bg-gray-200  border border-amber-300 w-10"
-
                     disabled={currentWeek == 1}
                     onClick={() => setcurrentWeek(w => w - 1)}>
                     &larr;
                 </button>
+
                 <span className="m-2"> Неделя {currentWeek} </span>
+
                 <span className="m-2"> Даты: {getWeekDateRange(currentWeek)} </span>
-
-
 
                 <button className="p-2 m-2 text-1xl rounded-full hover:bg-amber-500  disabled:bg-gray-200 border border-amber-300 w-10"
                     disabled={currentWeek == 22}
@@ -69,11 +53,11 @@ export default function Home() {
                 </button>
             </div>
 
-            <ScheduleByDay key={1} removeSchedule={removeScheduleHandler} schedule={currentSchedule} weekDay={1} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={2} removeSchedule={removeScheduleHandler} schedule={currentSchedule} weekDay={2} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={3} removeSchedule={removeScheduleHandler} schedule={currentSchedule} weekDay={3} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={4} removeSchedule={removeScheduleHandler} schedule={currentSchedule} weekDay={4} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
-            <ScheduleByDay key={5} removeSchedule={removeScheduleHandler} schedule={currentSchedule} weekDay={5} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={1} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={1} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={2} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={2} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={3} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={3} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={4} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={4} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
+            <ScheduleByDay key={5} removeSchedule={props.onRemovePair} schedule={props.schedules} weekDay={5} weekNumber={currentWeek} isAllWeeks={isAllWeeks} />
         </main>
     )
 }

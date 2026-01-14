@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { getDateDay } from "./ScheduleByDay"
 import type ScheduleTeacher from "../models/schedule"
 
-export function Journal() {
+export function Journal(props: { schedule: ScheduleTeacher[] }) {
 
     const [group, setGroup] = useState("ИП232")
     const [subject, setSubject] = useState("МДК 01.03")
-    const [schedule, setSchedule] = useState<ScheduleTeacher[]>([])
+    // const [schedule, setSchedule] = useState<ScheduleTeacher[]>([])
 
-    useEffect(() => setSchedule(JSON.parse(localStorage.getItem("scheduleSave") || "[]")), [])
+    // useEffect(() => setSchedule(JSON.parse(localStorage.getItem("scheduleSave") || "[]")), [])
 
     const allDates: string[] = []
 
     // Пар в неделю
     const pairsInWeek = (group: string, subject: string) => {
-        return schedule.filter(p => p.group == group && p.subject == subject)
+        return props.schedule.filter(p => p.group == group && p.subject == subject)
     }
 
     console.log(pairsInWeek(group, subject))
@@ -42,7 +42,7 @@ export function Journal() {
 
                 <h2 className="m-2 p-2">Группы</h2>
                 <div>
-                    {schedule.map(s => s.group).filter((value, index, self) => self.indexOf(value) === index).map((group, index) => (
+                    {props.schedule.map(s => s.group).filter((value, index, self) => self.indexOf(value) === index).map((group, index) => (
                         <span key={index}
                             onClick={() => setGroup(group)}
                             className="mr-2 px-3 py-1 cursor-pointer hover:bg-amber-500 bg-amber-200 rounded-full inline-block mb-2">
@@ -53,7 +53,7 @@ export function Journal() {
 
                 <h2 className="m-2 p-2">Предметы</h2>
                 <div>
-                    {schedule.map(s => s.subject).filter((value, index, self) => self.indexOf(value) === index).map((group, index) => (
+                    {props.schedule.map(s => s.subject).filter((value, index, self) => self.indexOf(value) === index).map((group, index) => (
                         <span key={index}
                             onClick={() => setSubject(group)}
                             className="mr-2 px-3 py-1 cursor-pointer hover:bg-amber-500 bg-amber-200 rounded-full inline-block mb-2">

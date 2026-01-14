@@ -25,7 +25,7 @@ export const ScheduleByDay = (props: { schedule: ScheduleTeacher[], removeSchedu
                 <p className=" text-green-900 self-start"> Классный час </p>
                 : null}
 
-            <span title="Удалить пару" className="self-end flex items-center justify-center w-10 h-10 opacity-0 rounded-full bg-amber-500 cursor-pointer hover:opacity-100 transition-opacity duration-300" onClick={() => navigate('/create')}>+</span>
+            <span title="Добавить пару" className="self-end flex items-center justify-center w-10 h-10 opacity-0 rounded-full bg-amber-500 cursor-pointer hover:opacity-100 transition-opacity duration-300" onClick={() => navigate('/create')}>+</span>
 
             <ul>
                 {
