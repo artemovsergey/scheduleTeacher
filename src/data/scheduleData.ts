@@ -6,7 +6,8 @@ export let schedulesASV: ScheduleTeacher[] = [
 {id: 1, weekDay: 1, numberPair: 1, subject: "МДК 01.03"  , group: "ИП235", weeks: [1,2,3,4,5,6,7,8,9,10,11,15,17] },
 {id: 2, weekDay: 1, numberPair: 2, subject: "МДК 01.04"  , group: "ИП235", weeks: [1,2,3,4,5,6,7,8,9,10,11,15,17] },
 {id: 3, weekDay: 1, numberPair: 3, subject: "МДК 09.01" , group: "ИВ234", weeks: [1,2,3,4,8,9,10,11,12,13,14,15,16,17,18,19,20] },
-{id: 4, weekDay: 1, numberPair: 4, subject: "МДК 01.04"  , group: "ИП232", weeks: [4,9,10,11] },
+{id: 4, weekDay: 1, numberPair: 4, subject: "МДК 01.04"  , group: "ИП232", weeks: [9,10,11] },
+{id: 88, weekDay: 1, numberPair: 4, subject: "МДК 01.03"  , group: "ИП232", weeks: [4] },
 {id: 5, weekDay: 1, numberPair: 4, subject: "МДК 01.03"  , group: "ИП236", weeks: [1,2,3,4,5,6,7,8,12,14,15,16] },
 {id: 6, weekDay: 1, numberPair: 5, subject: "МДК 01.03"  , group: "ИП236", weeks: [1,2,7,8] },
 
