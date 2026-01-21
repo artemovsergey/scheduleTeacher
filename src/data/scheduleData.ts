@@ -25,7 +25,7 @@ export let schedulesASV: ScheduleTeacher[] = [
 {id: 15, weekDay: 3, numberPair: 2, subject: "МДК 01.04"  , group: "ИП232", weeks: [1,2,3,4,5,6,7,8,9,10,11,13,14] },
 {id: 16, weekDay: 3, numberPair: 2, subject: "МДК 01.03"  , group: "ИП236", weeks: [15] },
 {id: 17, weekDay: 3, numberPair: 3, subject: "МДК 01.03"  , group: "ИП232", weeks: [1,2,3,4,5,6,7,8,9,10,11,13,14] },
-{id: 18, weekDay: 3, numberPair: 4, subject: "МДК 01.03"  , group: "ИП232", weeks: [1,2,3,4,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22] },
+{id: 18, weekDay: 3, numberPair: 4, subject: "МДК 01.03"  , group: "ИП232", weeks: [1,2,3,4,7,8,9,10,11] },
 {id: 19, weekDay: 3, numberPair: 4, subject: "МДК 01.03"  , group: "ИП236", weeks: [12,14,15,16] },
 
 // Четверг
