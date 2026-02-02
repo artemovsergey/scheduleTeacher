@@ -1,11 +1,11 @@
 import { useState } from "react"
 import "../data/scheduleData"
-import { ScheduleByDay } from "./ScheduleByDay"
+import { getWeek, ScheduleByDay } from "./ScheduleByDay"
 import type ScheduleTeacher from "../models/schedule"
 
 export default function Home(props: { schedules: ScheduleTeacher[], onRemovePair: (pair: ScheduleTeacher) => void }) {
 
-    const [currentWeek, setcurrentWeek] = useState(1)
+    const [currentWeek, setcurrentWeek] = useState(getWeek(new Date()))
     const [isAllWeeks, setIsAllWeeks] = useState(false)
 
     // const loadToLocalStorage = () => {

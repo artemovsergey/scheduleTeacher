@@ -6,8 +6,12 @@ export const ScheduleByDay = (props: { schedule: ScheduleTeacher[], removeSchedu
 
     const navigate = useNavigate();
 
-    let currentDate: string = `${new Date().getDate()}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`
-    // currentDate = '12.01'
+    let currentDate: string = `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`
+    // let currentDate = '2.02'
+    // console.log("Текущая дата: ",currentDate)
+    // console.log("_")
+    // console.log("Номер недели", props.weekNumber)
+    // console.log(getDateDay(props.weekNumber, props.weekDay))
     return (
         <div className={`flex flex-col p-5 items-center border rounded-2xl w-100 ${currentDate === getDateDay(props.weekNumber, props.weekDay) ? "bg-amber-100 text-black" : "bg-white"}`}>
 
@@ -86,3 +90,17 @@ export function getDateDay(weekNumber: number, weekDay: number) {
     return `${formatDate(startDate)}`
 }
 
+
+/**
+ * Определяет номер учебной недели по текущей дате
+ * @param date - Дата для проверки (по умолчанию текущая дата)
+ * @returns Номер учебной недели от 1 до 22 или 0, если дата вне учебного периода
+ */
+export function getWeek(date: Date = new Date()): number {
+  const startDate = new Date('2026-01-12T00:00:00');
+  if (date < startDate) return 0;
+  const diffInMs = date.getTime() - startDate.getTime();
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  const weekNumber = Math.floor(diffInDays / 7) + 1;
+  return weekNumber > 22 ? 0 : weekNumber;
+}
