@@ -60,7 +60,6 @@ const PAIR_SCHEDULES: Record<number, Array<{ start: string, end: string }>> = {
 export const ScheduleDay = ({
   pairs,
   weekDay,
-  weekNumber,
   onRemovePair,
   isToday
 }: {
@@ -71,7 +70,7 @@ export const ScheduleDay = ({
   isToday: boolean
 }) => {
   const navigate = useNavigate();
-  const currentDate = getDateDay(weekNumber, weekDay);
+  // const currentDate = getDateDay(weekNumber, weekDay);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   // Обновляем текущее время каждую секунду
@@ -240,16 +239,16 @@ export const ScheduleDay = ({
   )
 }
 
-function getDateDay(weekNumber: number, weekDay: number) {
-  const baseDate = new Date(2026, 0, 12);
-  const startDate = new Date(baseDate);
-  startDate.setDate(startDate.getDate() + (weekNumber - 1) * 7 + (weekDay - 1));
+// function getDateDay(weekNumber: number, weekDay: number) {
+//   const baseDate = new Date(2026, 0, 12);
+//   const startDate = new Date(baseDate);
+//   startDate.setDate(startDate.getDate() + (weekNumber - 1) * 7 + (weekDay - 1));
 
-  const formatDate = (date: Date): string => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    return `${day}.${month}`;
-  };
+//   const formatDate = (date: Date): string => {
+//     const day = date.getDate().toString().padStart(2, '0');
+//     const month = (date.getMonth() + 1).toString().padStart(2, '0');
+//     return `${day}.${month}`;
+//   };
 
-  return formatDate(startDate);
-}
+//   return formatDate(startDate);
+// }

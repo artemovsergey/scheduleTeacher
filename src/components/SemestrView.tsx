@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import type ScheduleTeacher from "../models/schedule";
 import React from "react";
-import { exportScheduleToPDF } from "./ExportSchedulePdf";
 
 export default function SemesterView({ schedules }: { schedules: ScheduleTeacher[] }) {
   const navigate = useNavigate();
@@ -330,10 +329,3 @@ export default function SemesterView({ schedules }: { schedules: ScheduleTeacher
     </div>
   )
 }
-
-// Вспомогательная функция для склонения (больше не используется в основном интерфейсе, но оставлена для совместимости)
-const getPairCountText = (count: number): string => {
-  if (count === 1) return "пара";
-  if (count > 1 && count < 5) return "пары";
-  return "пар";
-};

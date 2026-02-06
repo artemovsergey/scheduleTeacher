@@ -28,7 +28,7 @@ export default function Header({ teacher, onChangeTeacher }: {
             </svg>
           </div>
           <div className="hidden md:block">
-            <div className="text-xs font-medium text-slate-500">Учебное расписание</div>
+            <div className="text-xs font-medium text-slate-500"></div>
           </div>
         </div>
 
