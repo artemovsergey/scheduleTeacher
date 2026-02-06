@@ -1,96 +1,146 @@
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import Home from "./components/Home"
-import { HashRouter, Route, Routes } from "react-router-dom"
-import { CreatePair } from "./components/CreatePair"
-import { Journal } from "./components/Journal"
-import { useEffect, useState } from "react"
-import { schedulesASV, schedulesEIV, schedulesLSP } from "./data/scheduleData"
-import type ScheduleTeacher from "./models/schedule"
-
+// App.tsx
+import { useState, useEffect } from "react";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import { CreatePair } from "./components/CreatePair";
+import { Journal } from "./components/Journal";
+import { schedulesASV, schedulesEIV, schedulesLSP } from "./data/scheduleData";
+import type ScheduleTeacher from "./models/schedule";
+import SemesterView from "./components/SemestrView";
 
 export default function App() {
+  const [teacher, setTeacher] = useState(() =>
+    JSON.parse(localStorage.getItem("teacher") || '"asv"')
+  );
+  const [currentSchedule, setCurrentSchedule] = useState<ScheduleTeacher[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
 
-  const [teacher, setTeacher] = useState("asv");
-  const [currentSchedule, setCurrentSchedule] = useState<ScheduleTeacher[]>([])
+  useEffect(() => {
+    const savedWeek = localStorage.getItem('selectedWeek');
+    if (savedWeek) {
+      setSelectedWeek(parseInt(savedWeek));
+      localStorage.removeItem('selectedWeek');
+    }
+  }, []);
 
   const handleTeacherChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTeacher(e.target.value);
-    localStorage.setItem("teacher", JSON.stringify(e.target.value));
+    const newTeacher = e.target.value;
+    setTeacher(newTeacher);
+    localStorage.setItem("teacher", JSON.stringify(newTeacher));
   };
 
   useEffect(() => {
-    let schedules: ScheduleTeacher[]
-    if (teacher == 'asv') {
-      if (localStorage.getItem("scheduleASV")) {
-        schedules = JSON.parse(localStorage.getItem("scheduleASV") || '{}')
-      } else {
-        schedules = schedulesASV
-        localStorage.setItem("scheduleASV", JSON.stringify(schedulesASV))
+    const loadSchedule = () => {
+      const storageKey = `schedule${teacher.toUpperCase()}`;
+      const defaultSchedule =
+        teacher === 'asv' ? schedulesASV :
+          teacher === 'lsp' ? schedulesLSP : schedulesEIV;
+
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (saved) {
+          setCurrentSchedule(JSON.parse(saved));
+        } else {
+          localStorage.setItem(storageKey, JSON.stringify(defaultSchedule));
+          setCurrentSchedule(defaultSchedule);
+        }
+      } catch (error) {
+        console.error("Ошибка загрузки расписания:", error);
+        localStorage.setItem(storageKey, JSON.stringify(defaultSchedule));
+        setCurrentSchedule(defaultSchedule);
+      } finally {
+        setIsLoading(false);
       }
-    }
-    else if (teacher == 'lsp') {
-      if (localStorage.getItem("scheduleLSP")) {
-        schedules = JSON.parse(localStorage.getItem("scheduleLSP") || '{}')
-      } else {
-        schedules = schedulesLSP
-        localStorage.setItem("scheduleLSP", JSON.stringify(schedulesLSP))
-      }
-    } else {
-      if (localStorage.getItem("scheduleEIV")) {
-        schedules = JSON.parse(localStorage.getItem("scheduleEIV") || '{}')
-      } else {
-        schedules = schedulesEIV
-        localStorage.setItem("scheduleEIV", JSON.stringify(schedulesEIV))
-      }
-    }
-    setCurrentSchedule(schedules)
+    };
+
+    setIsLoading(true);
+    const timer = setTimeout(loadSchedule, 200);
+    return () => clearTimeout(timer);
   }, [teacher]);
 
   const removePairHandler = (pair: ScheduleTeacher) => {
-    const result: boolean = confirm(`Вы согласны снять пару ${pair.subject} в группе ${pair.group} ?`);
-    if (result) {
+    if (!confirm(`Удалить пару "${pair.subject}" у группы ${pair.group}?`)) return;
 
-      let schedule = currentSchedule.filter(p => p.id != pair.id)
+    const updatedSchedule = currentSchedule.filter(p => p.id !== pair.id);
+    const storageKey = `schedule${teacher.toUpperCase()}`;
 
-      switch (teacher) {
-        case 'asv':
-          localStorage.setItem("scheduleASV", JSON.stringify(schedule))
-          break;
-        case 'lsp':
-          localStorage.setItem("scheduleLSP", JSON.stringify(schedule))
-          break;
-        case 'eiv':
-          localStorage.setItem("scheduleEIV", JSON.stringify(schedule))
-          break;
-      }
-      setCurrentSchedule(schedule)
-    } else {
-      console.log("Пользователь выбрал Нет/Отмена");
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(updatedSchedule));
+      setCurrentSchedule(updatedSchedule);
+    } catch (error) {
+      console.error("Ошибка сохранения расписания:", error);
+      alert("Не удалось сохранить изменения");
     }
-  }
+  };
 
-  const updateSchedule = (s: ScheduleTeacher[]) => {
-    setCurrentSchedule(s)
+  const updateSchedule = (newSchedule: ScheduleTeacher[]) => {
+    setCurrentSchedule(newSchedule);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center p-4">
+          <div className="w-8 h-8 border-2 border-slate-300 border-t-indigo-600 rounded-full animate-spin mx-auto mb-3"></div>
+          <p className="text-slate-600 text-sm">Загрузка расписания...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col h-screen" >
-
-      {/* <BrowserRouter basename="/scheduleTeacher" > */}
+    <div className="min-h-screen bg-slate-50 flex flex-col">
       <HashRouter>
         <Header teacher={teacher} onChangeTeacher={handleTeacherChange} />
 
-        <Routes >
-          <Route path="/create" element={<CreatePair teacher={teacher} schedule={currentSchedule} update={updateSchedule} />} />
-          <Route path="/" element={<Home schedules={currentSchedule} onRemovePair={removePairHandler} />} />
-          <Route path="*" element={<Home schedules={currentSchedule} onRemovePair={removePairHandler} />} />
-          <Route path="/journal" element={<Journal schedule={currentSchedule} />} />
-        </Routes>
+        <main className="flex-1 py-3 px-3 sm:px-4 md:px-6 max-w-6xl mx-auto w-full">
+          <Routes>
+            <Route
+              path="/create"
+              element={
+                <CreatePair
+                  teacher={teacher}
+                  schedule={currentSchedule}
+                  update={updateSchedule}
+                />
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <Home
+                  schedules={currentSchedule}
+                  onRemovePair={removePairHandler}
+                  initialWeek={selectedWeek}
+                />
+              }
+            />
+            <Route
+              path="/semester"
+              element={<SemesterView schedules={currentSchedule} />}
+            />
+            <Route
+              path="/journal"
+              element={<Journal schedule={currentSchedule} />}
+            />
+            <Route
+              path="*"
+              element={
+                <Home
+                  schedules={currentSchedule}
+                  onRemovePair={removePairHandler}
+                  initialWeek={selectedWeek}
+                />
+              }
+            />
+          </Routes>
+        </main>
 
         <Footer />
       </HashRouter>
-      {/* </BrowserRouter> */}
-    </div >
+    </div>
   )
 }
