@@ -1,5 +1,5 @@
 export default interface ScheduleTeacher{
-    id: string,
+    id: number,
     weekDay: number, // 1-5
     numberPair: number // 1-6
     group: string,

@@ -38,9 +38,10 @@ export const CreatePair = ({
 
   const handleAddPair = () => {
     if (!group || !subject) return;
+    let count = 1;
 
     const newPair: ScheduleTeacher = {
-      id: Date.now().toString(), // простое уникальное id
+      id: count++, // простое уникальное id
       weekDay: day,
       numberPair,
       group,
