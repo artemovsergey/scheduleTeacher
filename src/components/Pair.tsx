@@ -39,7 +39,7 @@ export const Pair = ({ pair, isAllWeeks }: {
               key={week}
               className="px-2 py-0.5 bg-slate-100 text-slate-700 text-[0.7rem] rounded-md"
             >
-              Н{week}
+              {week}
             </span>
           ))}
           {pair.weeks.length > 4 && (

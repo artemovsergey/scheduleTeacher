@@ -8,7 +8,7 @@ import { CreatePair } from "./components/CreatePair";
 import { Journal } from "./components/Journal";
 import { schedulesASV, schedulesEIV, schedulesLSP } from "./data/scheduleData";
 import type ScheduleTeacher from "./models/schedule";
-import SemesterView from "./components/SemestrView";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function App() {
   const [teacher, setTeacher] = useState(() =>
@@ -28,8 +28,10 @@ export default function App() {
 
   const handleTeacherChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newTeacher = e.target.value;
+    toast("Расписание преподавателя изменено");
     setTeacher(newTeacher);
     localStorage.setItem("teacher", JSON.stringify(newTeacher));
+
   };
 
   useEffect(() => {
@@ -94,6 +96,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <HashRouter>
+
         <Header teacher={teacher} onChangeTeacher={handleTeacherChange} />
 
         <main className="flex-1 py-3 px-3 sm:px-4 md:px-6 max-w-6xl mx-auto w-full">
@@ -118,10 +121,10 @@ export default function App() {
                 />
               }
             />
-            <Route
+            {/* <Route
               path="/semester"
               element={<SemesterView schedules={currentSchedule} />}
-            />
+            /> */}
             <Route
               path="/journal"
               element={<Journal schedule={currentSchedule} />}
@@ -140,7 +143,24 @@ export default function App() {
         </main>
 
         <Footer />
+
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
       </HashRouter>
+
+
+
+
     </div>
   )
 }

@@ -38,10 +38,9 @@ export const CreatePair = ({
 
   const handleAddPair = () => {
     if (!group || !subject) return;
-    let count = 1;
 
     const newPair: ScheduleTeacher = {
-      id: count++, // простое уникальное id
+      id: crypto.randomUUID(), // простое уникальное id
       weekDay: day,
       numberPair,
       group,

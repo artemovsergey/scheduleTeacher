@@ -130,16 +130,6 @@ export const ScheduleDay = ({
 
   return (
     <div className="relative space-y-2">
-      {/* Плавающая кнопка добавления — всегда видна */}
-      <button
-        onClick={() => navigate('/create')}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-indigo-600 text-white shadow-xl hover:bg-indigo-700 hover:shadow-2xl transition-all flex items-center justify-center group animate-fade-in"
-        aria-label="Добавить новую пару"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 transition-transform group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-      </button>
 
       {/* Состояние: нет пар */}
       {pairs.length === 0 && (
@@ -239,16 +229,3 @@ export const ScheduleDay = ({
   )
 }
 
-// function getDateDay(weekNumber: number, weekDay: number) {
-//   const baseDate = new Date(2026, 0, 12);
-//   const startDate = new Date(baseDate);
-//   startDate.setDate(startDate.getDate() + (weekNumber - 1) * 7 + (weekDay - 1));
-
-//   const formatDate = (date: Date): string => {
-//     const day = date.getDate().toString().padStart(2, '0');
-//     const month = (date.getMonth() + 1).toString().padStart(2, '0');
-//     return `${day}.${month}`;
-//   };
-
-//   return formatDate(startDate);
-// }
