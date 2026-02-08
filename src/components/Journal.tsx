@@ -106,13 +106,6 @@ const sortByDates = (dates: string[]) =>
     return dateA.getTime() - dateB.getTime();
   });
 
-const getDayOfWeek = (dateStr: string): string => {
-  const [day, month] = dateStr.split('.').map(Number);
-  const date = new Date(2026, month - 1, day);
-  const days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
-  return days[date.getDay()] || "";
-};
-
 const getDateDay = (weekNumber: number, weekDay: number) => {
   const baseDate = new Date(2026, 0, 12);
   const startDate = new Date(baseDate);

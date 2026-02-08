@@ -1,5 +1,4 @@
 // ScheduleDay.tsx
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import type ScheduleTeacher from "../models/schedule";
 
@@ -69,7 +68,7 @@ export const ScheduleDay = ({
   onRemovePair: (pair: ScheduleTeacher) => void,
   isToday: boolean
 }) => {
-  const navigate = useNavigate();
+
   // const currentDate = getDateDay(weekNumber, weekDay);
   const [currentTime, setCurrentTime] = useState(new Date());
 
