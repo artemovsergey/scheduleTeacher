@@ -9,6 +9,7 @@ import { Journal } from "./components/Journal";
 import { schedulesASV, schedulesEIV, schedulesLSP } from "./data/scheduleData";
 import type ScheduleTeacher from "./models/schedule";
 import { toast, ToastContainer } from "react-toastify";
+import { Toaster } from "sonner";
 
 export default function App() {
   const [teacher, setTeacher] = useState(() =>
@@ -71,6 +72,7 @@ export default function App() {
     try {
       localStorage.setItem(storageKey, JSON.stringify(updatedSchedule));
       setCurrentSchedule(updatedSchedule);
+      toast("Пара удалена");
     } catch (error) {
       console.error("Ошибка сохранения расписания:", error);
       alert("Не удалось сохранить изменения");
@@ -154,6 +156,23 @@ export default function App() {
           draggable
           pauseOnHover
         />
+
+        {/* <Toaster
+          position="top-right"
+          duration={3000}
+          expand={false}
+          visibleToasts={3}
+          toastOptions={{
+            classNames: {
+              toast: 'bg-white border border-slate-200 rounded-lg shadow-lg',
+              title: 'text-slate-800 font-medium text-sm',
+              description: 'text-slate-600',
+              actionButton: 'bg-indigo-600 text-white',
+              cancelButton: 'bg-slate-100 text-slate-700',
+              closeButton: 'text-slate-400 hover:text-slate-600',
+            },
+          }} */}
+
 
       </HashRouter>
 
