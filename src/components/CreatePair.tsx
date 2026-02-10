@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import type ScheduleTeacher from "../models/schedule";
+import { toast } from "react-toastify";
+import { getCurrentWeek } from "../utilites/currentWeek";
 
 export const CreatePair = ({
   teacher,
@@ -18,6 +20,7 @@ export const CreatePair = ({
   const [numberPair, setNumberPair] = useState(1);
   const [group, setGroup] = useState("");
   const [subject, setSubject] = useState("");
+  const [numberWeek, setNumberWeek] = useState<number>(getCurrentWeek());
 
   const daysOfWeek = [
     { value: 1, label: "Понедельник" },
@@ -40,14 +43,16 @@ export const CreatePair = ({
     if (!group || !subject) return;
 
     const newPair: ScheduleTeacher = {
-      id: crypto.randomUUID(), // простое уникальное id
+      id: crypto.randomUUID(),
       weekDay: day,
-      numberPair,
-      group,
-      subject,
-      status: "замена",
-      weeks: [1] // по умолчанию первая неделя, можно расширить
+      numberPair: numberPair,
+      group: group,
+      subject: subject,
+      status: "новая",
+      weeks: [numberWeek]
     };
+
+    console.log(newPair)
 
     const newSchedule = [...schedule, newPair];
     update(newSchedule);
@@ -55,8 +60,8 @@ export const CreatePair = ({
     // Сохраняем в localStorage
     const storageKey = `schedule${teacher.toUpperCase()}`;
     localStorage.setItem(storageKey, JSON.stringify(newSchedule));
-
-    navigate("/"); // возвращаемся на расписание
+    toast("Пара добавлена")
+    navigate("/");
   };
 
   return (
@@ -117,6 +122,18 @@ export const CreatePair = ({
             <option key={s} value={s}>{s}</option>
           ))}
         </select>
+      </div>
+
+      {/* Номер недели */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-slate-700 mb-1">Номер недели</label>
+        <input
+          type="number"
+          value={numberWeek}
+          onChange={(e) => setNumberWeek(Number(e.target.value))}
+          className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        />
+
       </div>
 
       <button

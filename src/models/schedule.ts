@@ -6,7 +6,7 @@ export default interface ScheduleTeacher{
     group: string,
     subject: string // предмет
     weeks: number[]
-    status?: "замена" | "снято" | "новое"
+    status?: "" | "снята" | "новая"
     // isReplacement: boolean
     // addedDate: string
 }

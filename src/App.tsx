@@ -31,7 +31,6 @@ export default function App() {
     toast("Расписание преподавателя изменено");
     setTeacher(newTeacher);
     localStorage.setItem("teacher", JSON.stringify(newTeacher));
-
   };
 
   useEffect(() => {
