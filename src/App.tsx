@@ -9,7 +9,6 @@ import { Journal } from "./components/Journal";
 import { schedulesASV, schedulesEIV, schedulesLSP } from "./data/scheduleData";
 import type ScheduleTeacher from "./models/schedule";
 import { toast, ToastContainer } from "react-toastify";
-import { Toaster } from "sonner";
 
 export default function App() {
   const [teacher, setTeacher] = useState(() =>
