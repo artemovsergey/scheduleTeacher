@@ -37,7 +37,7 @@ export const CreatePair = ({
   useEffect(() => {
     setGroup(teacherGroups[0] || "");
     setSubject(teacherSubjects[0] || "");
-  }, [teacherGroups, teacherSubjects]);
+  }, []);
 
   const handleAddPair = () => {
     if (!group || !subject) return;
@@ -101,7 +101,7 @@ export const CreatePair = ({
         <label className="block text-sm font-medium text-slate-700 mb-1">Группа</label>
         <select
           value={group}
-          onChange={(e) => setGroup(e.target.value)}
+          onChange={(e) => { setGroup(e.target.value) }}
           className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
         >
           {teacherGroups.map(g => (

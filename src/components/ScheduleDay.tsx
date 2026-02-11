@@ -1,60 +1,7 @@
 // ScheduleDay.tsx
 import { useState, useEffect } from "react";
 import type ScheduleTeacher from "../models/schedule";
-
-// Расписание пар для разных дней недели
-const PAIR_SCHEDULES: Record<number, Array<{ start: string, end: string }>> = {
-  // Понедельник (1) - особое расписание
-  1: [
-    { start: "08:30", end: "10:00" },
-    { start: "10:10", end: "11:40" },
-    { start: "12:00", end: "13:30" },
-    { start: "13:40", end: "15:10" },
-    { start: "15:20", end: "16:50" },
-    { start: "17:00", end: "18:30" },
-    { start: "18:40", end: "20:10" }
-  ],
-  // Вторник (2) - стандартное расписание
-  2: [
-    { start: "09:00", end: "10:30" },
-    { start: "10:40", end: "12:10" },
-    { start: "12:30", end: "14:00" },
-    { start: "14:10", end: "15:40" },
-    { start: "15:50", end: "17:20" },
-    { start: "17:30", end: "19:00" },
-    { start: "19:10", end: "20:40" }
-  ],
-  // Среда (3) - стандартное расписание
-  3: [
-    { start: "09:00", end: "10:30" },
-    { start: "10:40", end: "12:10" },
-    { start: "12:30", end: "14:00" },
-    { start: "14:10", end: "15:40" },
-    { start: "15:50", end: "17:20" },
-    { start: "17:30", end: "19:00" },
-    { start: "19:10", end: "20:40" }
-  ],
-  // Четверг (4) - особое расписание
-  4: [
-    { start: "08:00", end: "09:30" },
-    { start: "09:40", end: "11:10" },
-    { start: "11:30", end: "13:00" },
-    { start: "13:10", end: "14:40" },
-    { start: "14:50", end: "16:20" },
-    { start: "16:30", end: "18:00" },
-    { start: "18:10", end: "19:40" }
-  ],
-  // Пятница (5) - стандартное расписание
-  5: [
-    { start: "09:00", end: "10:30" },
-    { start: "10:40", end: "12:10" },
-    { start: "12:30", end: "14:00" },
-    { start: "14:10", end: "15:40" },
-    { start: "15:50", end: "17:20" },
-    { start: "17:30", end: "19:00" },
-    { start: "19:10", end: "20:40" }
-  ]
-};
+import { PAIR_SCHEDULES } from "../utilites/pair_time";
 
 export const ScheduleDay = ({
   pairs,
@@ -135,12 +82,12 @@ export const ScheduleDay = ({
         <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
           <div className="text-5xl mb-3">🕗</div>
           <p className="text-slate-600 font-medium text-lg">Нет занятий</p>
-          <p className="text-slate-400 text-sm mt-1">Добавьте первую пару в этот день</p>
         </div>
       )}
 
       {/* Список пар */}
-      {pairs.map(pair => {
+
+      {pairs.sort((p1, p2) => p1.numberPair - p2.numberPair).map(pair => {
         const pairTime = getPairTime(pair.numberPair, weekDay);
         const pairStatus = isPairActive(pair);
         const isActive = pairStatus?.isActive;
@@ -158,8 +105,9 @@ export const ScheduleDay = ({
           >
             {/* Кнопка удаления — появляется только при наведении */}
             <button
+              title="Удалить"
               onClick={() => onRemovePair(pair)}
-              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600"
+              className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600"
               aria-label={`Удалить пару ${pair.subject}`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
