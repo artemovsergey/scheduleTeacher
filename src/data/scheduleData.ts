@@ -92,14 +92,14 @@ export let schedulesLSP: ScheduleTeacher[] = [
 
 ]
 
-export let schedulesEIV: ScheduleTeacher[] = [
+export let schedules: ScheduleTeacher[] = [
 
 // Понедельник
 {id: "59", weekDay: 1, numberPair: 1, subject: "МДК 04.02"  , group: "ИБ243", weeks: [1,2,3,4,5,6,7,8,9,10,13,14,15,16,17,18,19,20,21] },
 {id: "60", weekDay: 1, numberPair: 2, subject: "МДК 04.02"  , group: "ИП242", weeks: [1,2,3,4,5,6,7,8,9,10,11,15,17] },
 {id: "61", weekDay: 1, numberPair: 3, subject: "МДК 08.02" , group: "ИВ244", weeks: [1,6,14,15,19] },
 {id: "62", weekDay: 1, numberPair: 4, subject: "МДК 04.02"  , group: "ИП247", weeks: [1,2,3,4,16,19] },
-{id: "63", weekDay: 1, numberPair: 4, subject: "WEB"  , group: "ИB233", weeks: [1,2,3,4,11,12,13,14,15,16,17,18,19,20,21] },
+{id: "63", weekDay: 1, numberPair: 4, subject: "WEB"  , group: "ИБ233", weeks: [1,2,3,4,11,12,13,14,15,16,17,18,19,20,21] },
 
 // Вторник
 {id: "64", weekDay: 2, numberPair: 1, subject: "МДК 08.02"  , group: "ИB244", weeks: [1,2,3,4,5,6,7,11,12,13,14,15,16,17,18,19,20] },
@@ -113,7 +113,7 @@ export let schedulesEIV: ScheduleTeacher[] = [
 {id: "70", weekDay: 3, numberPair: 1, subject: "МДК 04.02"  , group: "ИП247", weeks: [19] },
 {id: "71", weekDay: 3, numberPair: 2, subject: "МДК 04.02"  , group: "ИБ243", weeks: [1,2,3,4,6,14,15,16,19,20,21] },
 {id: "72", weekDay: 3, numberPair: 3, subject: "МДК 04.02"  , group: "ИП247", weeks: [1,2,3,4,6,16,19,20] },
-{id: "73", weekDay: 3, numberPair: 3, subject: "WEB"  , group: "ИБ232", weeks: [1,2,3,4,5,6,9,10,11,12,13,14,15,16,17,18,19,20,21] },
+{id: "73", weekDay: 3, numberPair: 3, subject: "WEB"  , group: "ИБ233", weeks: [1,2,3,4,5,6,9,10,11,12,13,14,15,16,17,18,19,20,21] },
 {id: "74", weekDay: 3, numberPair: 4, subject: "МДК 04.02"  , group: "ИП247", weeks: [6] },
 {id: "75", weekDay: 3, numberPair: 4, subject: "МДК 09.02"  , group: "ИВ234", weeks: [1,2,3,4,8,9,10,11,12,13,14,15,16,17,18,19,20] },
 {id: "76", weekDay: 3, numberPair: 5, subject: "МДК 09.02"  , group: "ИВ234", weeks: [14,15,19] },
