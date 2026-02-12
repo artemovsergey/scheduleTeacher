@@ -92,7 +92,7 @@ export let schedulesLSP: ScheduleTeacher[] = [
 
 ]
 
-export let schedules: ScheduleTeacher[] = [
+export let schedulesEIV: ScheduleTeacher[] = [
 
 // Понедельник
 {id: "59", weekDay: 1, numberPair: 1, subject: "МДК 04.02"  , group: "ИБ243", weeks: [1,2,3,4,5,6,7,8,9,10,13,14,15,16,17,18,19,20,21] },
