@@ -1,4 +1,3 @@
-// ScheduleDay.tsx
 import { useState, useEffect } from "react";
 import type ScheduleTeacher from "../models/schedule";
 import { PAIR_SCHEDULES } from "../utilites/pair_time";
@@ -6,17 +5,16 @@ import { PAIR_SCHEDULES } from "../utilites/pair_time";
 export const ScheduleDay = ({
   pairs,
   weekDay,
+  weekNumber,
   onRemovePair,
   isToday
 }: {
   pairs: ScheduleTeacher[],
   weekDay: number,
   weekNumber: number,
-  onRemovePair: (pair: ScheduleTeacher) => void,
+  onRemovePair: (pair: ScheduleTeacher, weekNumber: number) => void,
   isToday: boolean
 }) => {
-
-  // const currentDate = getDateDay(weekNumber, weekDay);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   // Обновляем текущее время каждую секунду
@@ -76,7 +74,6 @@ export const ScheduleDay = ({
 
   return (
     <div className="relative space-y-2">
-
       {/* Состояние: нет пар */}
       {pairs.length === 0 && (
         <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
@@ -86,7 +83,6 @@ export const ScheduleDay = ({
       )}
 
       {/* Список пар */}
-
       {pairs.sort((p1, p2) => p1.numberPair - p2.numberPair).map(pair => {
         const pairTime = getPairTime(pair.numberPair, weekDay);
         const pairStatus = isPairActive(pair);
@@ -106,7 +102,7 @@ export const ScheduleDay = ({
             {/* Кнопка удаления — появляется только при наведении */}
             <button
               title="Удалить"
-              onClick={() => onRemovePair(pair)}
+              onClick={() => onRemovePair(pair, weekNumber)}
               className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600"
               aria-label={`Удалить пару ${pair.subject}`}
             >
@@ -175,4 +171,3 @@ export const ScheduleDay = ({
     </div>
   )
 }
-

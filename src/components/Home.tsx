@@ -1,6 +1,4 @@
-// Home.tsx
 import { useState, useEffect } from "react";
-
 import type ScheduleTeacher from "../models/schedule";
 import { ScheduleDay } from "./ScheduleDay";
 import { getDateDay, getWeekDateRange, DayWeekNameShort } from "../utilites/date";
@@ -11,7 +9,7 @@ export default function Home({
   initialWeek = null
 }: {
   schedules: ScheduleTeacher[],
-  onRemovePair: (pair: ScheduleTeacher) => void,
+  onRemovePair: (pair: ScheduleTeacher, weekNumber: number) => void,
   initialWeek?: number | null
 }) {
   const [currentWeek, setCurrentWeek] = useState(1);
@@ -175,4 +173,3 @@ export default function Home({
     </div>
   )
 }
-

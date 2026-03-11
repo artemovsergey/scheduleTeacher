@@ -1,4 +1,3 @@
-// App.tsx
 import { useState, useEffect } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
@@ -6,24 +5,29 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import { CreatePair } from "./components/CreatePair";
 import { Journal } from "./components/Journal";
-import { schedulesASV, schedulesEIV, schedulesIAI, schedulesLSP } from "./data/scheduleData";
+import {
+  schedulesASV,
+  schedulesEIV,
+  schedulesIAI,
+  schedulesLSP,
+} from "./data/scheduleData";
 import type ScheduleTeacher from "./models/schedule";
 import { toast, ToastContainer } from "react-toastify";
 import SemesterView from "./components/SemestrView";
 
 export default function App() {
   const [teacher, setTeacher] = useState(() =>
-    JSON.parse(localStorage.getItem("teacher") || '"asv"')
+    JSON.parse(localStorage.getItem("teacher") || '"asv"'),
   );
   const [currentSchedule, setCurrentSchedule] = useState<ScheduleTeacher[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
 
   useEffect(() => {
-    const savedWeek = localStorage.getItem('selectedWeek');
+    const savedWeek = localStorage.getItem("selectedWeek");
     if (savedWeek) {
       setSelectedWeek(parseInt(savedWeek));
-      localStorage.removeItem('selectedWeek');
+      localStorage.removeItem("selectedWeek");
     }
   }, []);
 
@@ -38,9 +42,13 @@ export default function App() {
     const loadSchedule = () => {
       const storageKey = `schedule${teacher.toUpperCase()}`;
       const defaultSchedule =
-        teacher === 'asv' ? schedulesASV :
-          teacher === 'lsp' ? schedulesLSP : 
-          teacher === 'eiv' ? schedulesEIV : schedulesIAI;
+        teacher === "asv"
+          ? schedulesASV
+          : teacher === "lsp"
+            ? schedulesLSP
+            : teacher === "eiv"
+              ? schedulesEIV
+              : schedulesIAI;
 
       try {
         const saved = localStorage.getItem(storageKey);
@@ -64,15 +72,43 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [teacher]);
 
-  const removePairHandler = (pair: ScheduleTeacher) => {
+  const removePairHandler = (pair: ScheduleTeacher, weekToRemove?: number) => {
     if (!confirm(`Удалить пару "${pair.subject}" у группы ${pair.group}?`)) return;
 
-    const updatedSchedule = currentSchedule.filter(p => p.id !== pair.id);
-    const storageKey = `schedule${teacher.toUpperCase()}`;
+    // Если номер недели не передан, используем selectedWeek
+    const weekNumber = weekToRemove !== undefined ? weekToRemove : selectedWeek;
+    
+    // Если нет номера недели, ничего не делаем
+    if (weekNumber === null || weekNumber === undefined) {
+      toast.error("Не указана неделя для удаления");
+      return;
+    }
 
+    // Создаем новое расписание, обрабатывая каждую пару
+    const updatedSchedule = currentSchedule.map(p => {
+      // Если это не та пара, которую нужно изменить, оставляем как есть
+      if (p.id !== pair.id) return p;
+
+      // Для нужной пары удаляем конкретную неделю
+      const updatedWeeks = p.weeks.filter(w => w !== weekNumber);
+      
+      // Если после удаления недель массив пуст, возвращаем null (позже отфильтруем)
+      if (updatedWeeks.length === 0) {
+        return null;
+      }
+      
+      // Иначе возвращаем пару с обновленным массивом недель
+      return {
+        ...p,
+        weeks: updatedWeeks
+      };
+    }).filter((p): p is ScheduleTeacher => p !== null); // Удаляем все null значения
+
+    setCurrentSchedule(updatedSchedule);
+
+    const storageKey = `schedule${teacher.toUpperCase()}`;
     try {
       localStorage.setItem(storageKey, JSON.stringify(updatedSchedule));
-      setCurrentSchedule(updatedSchedule);
       toast("Пара удалена");
     } catch (error) {
       console.error("Ошибка сохранения расписания:", error);
@@ -98,7 +134,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <HashRouter>
-
         <Header teacher={teacher} onChangeTeacher={handleTeacherChange} />
 
         <main className="flex-1 py-3 px-3 sm:px-4 md:px-6 max-w-6xl mx-auto w-full">
@@ -157,29 +192,7 @@ export default function App() {
           draggable
           pauseOnHover
         />
-
-        {/* <Toaster
-          position="top-right"
-          duration={3000}
-          expand={false}
-          visibleToasts={3}
-          toastOptions={{
-            classNames: {
-              toast: 'bg-white border border-slate-200 rounded-lg shadow-lg',
-              title: 'text-slate-800 font-medium text-sm',
-              description: 'text-slate-600',
-              actionButton: 'bg-indigo-600 text-white',
-              cancelButton: 'bg-slate-100 text-slate-700',
-              closeButton: 'text-slate-400 hover:text-slate-600',
-            },
-          }} */}
-
-
       </HashRouter>
-
-
-
-
     </div>
-  )
+  );
 }
