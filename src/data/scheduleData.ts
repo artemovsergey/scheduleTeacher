@@ -135,3 +135,51 @@ export let schedulesEIV: ScheduleTeacher[] = [
  {id: "87", weekDay: 5, numberPair: 4, subject: "МДК 09.02"  , group: "ИВ234", weeks: [20] },
 
 ]
+
+
+export let schedulesIAI: ScheduleTeacher[] = [
+
+// Понедельник
+{id: "88", weekDay: 1, numberPair: 1, subject: "СД и ТДВ"  , group: "ИП222", weeks: [1,2,3,4,5,6,7,8,9,10] },
+{id: "89", weekDay: 1, numberPair: 2, subject: "СД и ТДВ"  , group: "ИВ234", weeks: [1,2,3,4,8,9,10,11,12,13,14,15,16,17,18,19,20,21] },
+{id: "90", weekDay: 1, numberPair: 2, subject: "СД и ТДВ"  , group: "ИП224", weeks: [7] },
+{id: "91", weekDay: 1, numberPair: 3, subject: "СД и ТДВ" , group: "ИП223", weeks: [1,3,4,5,6,7,8,10] },
+{id: "92", weekDay: 1, numberPair: 3, subject: "СД и ТДВ" , group: "ИБ233", weeks: [2,6] },
+{id: "93", weekDay: 1, numberPair: 4, subject: "СД и ТДВ"  , group: "ИБ233", weeks: [5,9,10] },
+
+// Вторник
+{id: "94", weekDay: 2, numberPair: 1, subject: "СД и ТДВ"  , group: "ИП225", weeks: [1,2,3,4,5,6,8,9,10,11] },
+{id: "95", weekDay: 2, numberPair: 1, subject: "СД и ТДВ"  , group: "ИП226", weeks: [1,2,3,4,5,7,8,9,10,11] },
+{id: "96", weekDay: 2, numberPair: 2, subject: "СД и ТДВ" , group: "ИП224", weeks: [1,2,3,4,5,6,7,9,10,11] },
+{id: "97", weekDay: 2, numberPair: 3, subject: "СД и ТДВ"  , group: "ИБ233", weeks: [1,2,3,4,5,6,9,10,11,12,13,14,15,16,17,18,19,20] },
+{id: "98", weekDay: 2, numberPair: 4, subject: "МДК 04.02"  , group: "ИКС242", weeks: [12,13,14,15,16,17,18,19,20,21,22] },
+{id: "99", weekDay: 2, numberPair: 4, subject: "СД и ТДВ"  , group: "ИП223", weeks: [5,6,7,8] },
+{id: "100", weekDay: 2, numberPair: 5, subject: "СД и ТДВ"  , group: "ИП224", weeks: [6,9] },
+
+// Среда
+{id: "101", weekDay: 3, numberPair: 1, subject: "МДК 04.02" , group: "ИКС243", weeks: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23] },
+{id: "102", weekDay: 3, numberPair: 2, subject: "СД и ТДВ"  , group: "ИП222", weeks: [1,2,3,4,5,6,7,8,9] },
+{id: "103", weekDay: 3, numberPair: 2, subject: "СД и ТДВ"  , group: "ИП225", weeks: [6,8,10] },
+{id: "104", weekDay: 3, numberPair: 3, subject: "СД и ТДВ"  , group: "ИП223", weeks: [1,2,3,4,5,6,7,8,10,11] },
+{id: "105", weekDay: 3, numberPair: 3, subject: "СД и ТДВ"  , group: "ИП226", weeks: [1,2,3,4,5,7,8,9,10] },
+{id: "106", weekDay: 3, numberPair: 4, subject: "МДК 04.02" , group: "ИКС244", weeks: [7,12,13,14,15,16,17,18,19,20,21] },
+{id: "107", weekDay: 3, numberPair: 4, subject: "СД и ТДВ"  , group: "ИП225", weeks: [1,2,3,4,5,6,8,9,10,11] },
+{id: "108", weekDay: 3, numberPair: 4, subject: "СД и ТДВ"  , group: "ИП226", weeks: [1,2,3,4,5,7,8,9,10,11] },
+
+// Четверг
+ {id: "109", weekDay: 4, numberPair: 1, subject: "СД и ТДВ"  , group: "ИБ233", weeks: [11,12,13,14,15,16,17,18,19] },
+ {id: "110", weekDay: 4, numberPair: 1, subject: "СД и ТДВ"  , group: "ИП224", weeks: [1,2,3,4,5,6,7,9,10] },
+ {id: "111", weekDay: 4, numberPair: 2, subject: "МДК 04.02" , group: "ИКС242", weeks: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22] },
+ {id: "112", weekDay: 4, numberPair: 3, subject: "СД и ТДВ"  , group: "ИП222", weeks: [3,6,7,8] },
+ {id: "113", weekDay: 4, numberPair: 4, subject: "СД и ТДВ"  , group: "ИП224", weeks: [1,2,3,4,5,6,7,9,10,11] },
+
+// Пятница
+ {id: "114", weekDay: 5, numberPair: 1, subject: "СД и ТДВ"  , group: "ИВ234", weeks: [1,2,8,9,10,12,13,14,15,16,17,18,19,21] },
+ {id: "115", weekDay: 5, numberPair: 2, subject: "МДК 04.02" , group: "ИКС244", weeks: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23] },
+ {id: "116", weekDay: 5, numberPair: 2, subject: "СД и ТДВ"  , group: "ИП226", weeks: [7,8,9] },
+ {id: "117", weekDay: 5, numberPair: 3, subject: "СД и ТДВ"  , group: "ИП222", weeks: [1,2,3,4,5,6,7,8,9] },
+ {id: "118", weekDay: 5, numberPair: 4, subject: "МДК 04.02" , group: "ИКС243", weeks: [11,12,13,14,15,16,17,18,19,20,21] },
+ {id: "119", weekDay: 5, numberPair: 4, subject: "СД и ТДВ"  , group: "ИП223", weeks: [1,2,3,4,5,6,7,8,10,11] },
+ {id: "120", weekDay: 5, numberPair: 5, subject: "СД и ТДВ"  , group: "ИП225", weeks: [1,2,3,4,5,6,8,9,10] },
+
+]

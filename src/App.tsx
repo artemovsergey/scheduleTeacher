@@ -6,9 +6,10 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import { CreatePair } from "./components/CreatePair";
 import { Journal } from "./components/Journal";
-import { schedulesASV, schedulesEIV, schedulesLSP } from "./data/scheduleData";
+import { schedulesASV, schedulesEIV, schedulesIAI, schedulesLSP } from "./data/scheduleData";
 import type ScheduleTeacher from "./models/schedule";
 import { toast, ToastContainer } from "react-toastify";
+import SemesterView from "./components/SemestrView";
 
 export default function App() {
   const [teacher, setTeacher] = useState(() =>
@@ -38,7 +39,8 @@ export default function App() {
       const storageKey = `schedule${teacher.toUpperCase()}`;
       const defaultSchedule =
         teacher === 'asv' ? schedulesASV :
-          teacher === 'lsp' ? schedulesLSP : schedulesEIV;
+          teacher === 'lsp' ? schedulesLSP : 
+          teacher === 'eiv' ? schedulesEIV : schedulesIAI;
 
       try {
         const saved = localStorage.getItem(storageKey);
@@ -121,10 +123,10 @@ export default function App() {
                 />
               }
             />
-            {/* <Route
+            <Route
               path="/semester"
               element={<SemesterView schedules={currentSchedule} />}
-            /> */}
+            />
             <Route
               path="/journal"
               element={<Journal schedule={currentSchedule} />}

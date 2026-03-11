@@ -25,6 +25,11 @@ export default function Header({ teacher, onChangeTeacher }: Props) {
       icon: Calendar,
     },
     {
+      path: "/semester",
+      label: "Семестр",
+      icon: Calendar,
+    },
+    {
       path: "/journal",
       label: "Журнал",
       icon: BookOpen,
@@ -78,6 +83,7 @@ export default function Header({ teacher, onChangeTeacher }: Props) {
               <option value="asv">Артемов С. В.</option>
               <option value="lsp">Лукьянова С. П.</option>
               <option value="eiv">Еремина И. В.</option>
+              <option value="iai">Индык А. И.</option>
             </select>
           </div>
         </div>
@@ -146,6 +152,8 @@ export default function Header({ teacher, onChangeTeacher }: Props) {
                 <option value="asv">Артемов С. В.</option>
                 <option value="lsp">Лукьянова С. П.</option>
                 <option value="eiv">Еремина И. В.</option>
+                <option value="iai">Индык А. И.</option>
+                
               </select>
             </div>
           </div>
